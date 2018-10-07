@@ -1,8 +1,8 @@
 import { Link as GatsbyLink } from 'gatsby';
-import React from "react"
+import React, {Component} from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
-import { Close, Button, Fixed } from 'rebass';
+import { Close, Button, Fixed, Modal, Text, Box, Heading, Absolute } from 'rebass';
 
 import VtmLogo from "../../assets/vtm-logo.svg"
 
@@ -66,6 +66,7 @@ const Tools = styled(Fixed)`
 
 const UIButton = styled(Button)`
   color: #ffffff;
+  background-color: rgba(0,0,0,0.33);
   &:hover {
     color: #eeee33;
   }
@@ -76,7 +77,20 @@ const MuseumLogo = styled(VtmLogo)`
   fill: #ffffff;
 `
 
-class PhotoDetail extends React.Component {
+class PhotoDetail extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {sharing: false};
+    this.handleShare = this.handleShare.bind(this);
+  }
+
+  handleShare() {
+    this.setState(prevState => ({
+      sharing: !prevState.sharing
+    }));
+  }
+
   render() {
     const {
       bigImage,
@@ -89,9 +103,11 @@ class PhotoDetail extends React.Component {
 
     const ToolBar = () => (
       <Tools>
-        <UIButton bg='black'>Original</UIButton>
-        <UIButton bg='black'>Duotone</UIButton>
-        <UIButton bg='black'>Colored</UIButton>
+        <UIButton>Original</UIButton>
+        <UIButton>Duotone</UIButton>
+        <UIButton>Colored</UIButton>
+        |
+        <UIButton onClick={this.handleShare}>Share!</UIButton>
       </Tools>
     )
 
@@ -112,6 +128,25 @@ class PhotoDetail extends React.Component {
         <div>
           <ToolBar />
         </div>
+        <div>
+        {this.state.sharing && (
+          <div>
+            <Fixed
+              top={0}
+              right={0}
+              bottom={0}
+              left={0}
+            />
+            <Modal width={256}>
+              <Box p={2}>
+                <Absolute top={1} right={1}><Close onClick={this.handleShare}/></Absolute>
+                <Heading textAlign="center" lineHeight="0.2" fontSize={6}>🤷</Heading>
+                <Text>Sorry! Sharing doesn't work yet, but you can download the image using your device download image feature.</Text>
+              </Box>
+            </Modal>
+          </div>
+        )}
+      </div>
       </div>
     )
   }
