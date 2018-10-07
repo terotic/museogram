@@ -86,9 +86,9 @@ class PhotoDetail extends Component {
       effect: "original"
     };
     this.handleShare = this.handleShare.bind(this);
-    this.handleShare = this.handleColored.bind(this);
-    this.handleShare = this.handleOriginal.bind(this);
-    this.handleShare = this.handleDuotone.bind(this);
+    this.handleColored = this.handleColored.bind(this);
+    this.handleOriginal = this.handleOriginal.bind(this);
+    this.handleDuotone = this.handleDuotone.bind(this);
   }
 
   handleShare = () => {
