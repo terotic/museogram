@@ -9,7 +9,7 @@ const SiteLogo = styled(NavLink)`
 `
 
 const BrandBox = styled(Flex)`
-  height: 300px;
+  height: 200px;
 `
 
 const Header = ({ brand, ...props }) => (

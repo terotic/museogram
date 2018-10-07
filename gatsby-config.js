@@ -12,8 +12,7 @@ module.exports = {
         method: "flickr.photosets.getPhotos",
         api_key: "a6101681cd3f2e6eaa7c3f83ddc5c7f2",
         photoset_id: "72157676384900235",
-        format: "json",
-        per_page: "15"
+        format: "json"
       },
     },
     {

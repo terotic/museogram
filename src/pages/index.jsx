@@ -16,6 +16,10 @@ const Gallery = styled(Flex)`
 const BlurbTitle = styled.h3`
   text-align: center;
 `
+const TextLink = styled(Link)`
+  color: #ffffff;
+  text-decoration: underline;
+`
 
 class IndexPage extends React.Component {
   static propTypes = {
@@ -73,6 +77,11 @@ class IndexPage extends React.Component {
           <Box p={3}>
             <BlurbTitle>Archive photos for your stories</BlurbTitle>
             <Lead is="p" textAlign='center'>Choose photographs from our selected free collection and mix your own stories for Instagram, Facebook or Snapchat.</Lead>
+            <Lead is="p" textAlign='center'>This application is a demo so the image editing features are for demonstration purposes only. Nevertheless you are very welcome to use and share the photos in your stories!</Lead>
+          </Box>
+          <Box p={3}>
+            <BlurbTitle>Work</BlurbTitle>
+            <Lead is="p" textAlign='center'>Is your work different now than the work in these photographs from Central Union of Consumer Co-operatives collection? Collected by the <TextLink href='https://www.flickr.com/photos/valokuvataiteenmuseo/albums/72157676384900235' children="Finnish Museum of Photography" color="white"/></Lead>
           </Box>
           <Gallery justify='left' flexWrap='nowrap' w={1}>
 

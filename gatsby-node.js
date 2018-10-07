@@ -26,7 +26,7 @@ exports.createPages = ({ graphql, actions }) => {
       graphql(
         `
           {
-            allFlickrContent(limit: 100) {
+            allFlickrContent(limit: 150) {
               edges {
                 node {
                   id

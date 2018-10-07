@@ -2,11 +2,17 @@ import { graphql, StaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Box, Flex, Heading, Provider as RebassProvider, Text, Small } from 'rebass';
+import { Box, Flex, Heading, Provider as RebassProvider, Text, Small , Link} from 'rebass';
 import { injectGlobal } from 'styled-components';
+import styled from "styled-components"
 import Img from "gatsby-image"
 import Footer from './Footer';
 import Header from './Header';
+
+const TextLink = styled(Link)`
+  color: #ffffff;
+  text-decoration: underline;
+`
 
 let Modal
 import(`../components/modal`).then(modal => {
@@ -81,7 +87,7 @@ class Layout extends React.Component {
     <Footer>
       <Flex justifyContent="space-around">
         <Box mt={6} mb={2} width={1/2}>
-          <Text is="p" align="center"><Small align="center">Museogram was created at hack4.fi 2018 using open photographs made public by the Museum of Photographic Art Finland.</Small></Text>
+          <Text is="p" align="center"><Small align="center">Museogram was created at  <TextLink href='https://hack4.fi' children="hack4.fi" color="white"/> 2018 using open photographs made public by the <TextLink href='https://www.valokuvataiteenmuseo.fi/' children="The Finnish Museum of Photography" color="white"/>.</Small></Text>
         </Box>
       </Flex>
     </Footer>
