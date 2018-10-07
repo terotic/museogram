@@ -81,31 +81,61 @@ class PhotoDetail extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {sharing: false};
+    this.state = {
+      sharing: false,
+      effect: "original"
+    };
     this.handleShare = this.handleShare.bind(this);
+    this.handleShare = this.handleColored.bind(this);
+    this.handleShare = this.handleOriginal.bind(this);
+    this.handleShare = this.handleDuotone.bind(this);
   }
 
-  handleShare() {
+  handleShare = () => {
     this.setState(prevState => ({
       sharing: !prevState.sharing
     }));
+    console.log("sharing");
+  }
+
+  handleOriginal = () => {
+    this.setState({
+      effect: "original"
+    });
+    console.log("effect: original");
+  }
+
+  handleColored = () => {
+    this.setState({
+      effect: "colored"
+    });
+    console.log("effect: color");
+  }
+
+  handleDuotone = () => {
+    this.setState({
+      effect: "duotone"
+    });
+    console.log("effect: duotone");
   }
 
   render() {
     const {
       bigImage,
       duotoneImage,
+      coloredImage,
       id
     } = this.props.post
 
     const { big } = bigImage.childImageSharp
-    const { colored } = duotoneImage.childImageSharp
+    const { colored } = coloredImage.childImageSharp
+    const { duotone } = duotoneImage.childImageSharp
 
     const ToolBar = () => (
       <Tools>
-        <UIButton>Original</UIButton>
-        <UIButton>Duotone</UIButton>
-        <UIButton>Colored</UIButton>
+        <UIButton onClick={this.handleOriginal}>Original</UIButton>
+        <UIButton onClick={this.handleDuotone}>Duotone</UIButton>
+        <UIButton onClick={this.handleColored}>Colored</UIButton>
         |
         <UIButton onClick={this.handleShare}>Share!</UIButton>
       </Tools>
@@ -115,9 +145,21 @@ class PhotoDetail extends Component {
       <div onClick={e => e.stopPropagation()}  >
         <div to={`/${id}/`}>
           <FullScreenImage>
+            {this.state.effect==="colored" && (
             <Img
               fluid={{ ...colored }}
             />
+            )}
+            {this.state.effect==="original" && (
+            <Img
+              fluid={{ ...big }}
+            />
+            )}
+            {this.state.effect==="duotone" && (
+            <Img
+              fluid={{ ...duotone }}
+            />
+            )}
           <CloseButton><GatsbyLink to="/">&times;</GatsbyLink></CloseButton>
           <TextOverlay contentEditable>
             Your Text Here
@@ -179,7 +221,20 @@ export const postDetailFragment = graphql`
         # thumbnails are created. This makes iterating on
         # designs effortless as we change the args
         # for the query and we get new thumbnails.
-        colored: fluid(duotone: { highlight: "#7bcbca", shadow: "#890b0b" }, maxWidth: 540, maxHeight: 960) {
+        duotone: fluid(duotone: { highlight: "#7bcbca", shadow: "#890b0b" }, maxWidth: 540, maxHeight: 960) {
+          src
+          srcSet
+        }
+      }
+    }
+    coloredImage: localImage {
+      childImageSharp {
+        # Here we query for *multiple* image thumbnails to be
+        # created. So with no effort on our part, 100s of
+        # thumbnails are created. This makes iterating on
+        # designs effortless as we change the args
+        # for the query and we get new thumbnails.
+        colored: fluid(duotone: { highlight: "#f6e766", shadow: "#103903" }, maxWidth: 540, maxHeight: 960) {
           src
           srcSet
         }
