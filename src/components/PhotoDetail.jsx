@@ -2,7 +2,7 @@ import { Link as GatsbyLink } from 'gatsby';
 import React from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
-import { Close } from 'rebass';
+import { Close, Button, Fixed } from 'rebass';
 
 import VtmLogo from "../../assets/vtm-logo.svg"
 
@@ -59,6 +59,18 @@ const MuseumLogoPlacer = styled.div`
   text-align: center;
 `
 
+const Tools = styled(Fixed)`
+  bottom: 12px;
+  right: 12px;
+`
+
+const UIButton = styled(Button)`
+  color: #ffffff;
+  &:hover {
+    color: #eeee33;
+  }
+`
+
 const MuseumLogo = styled(VtmLogo)`
   width: 100%;
   fill: #ffffff;
@@ -68,15 +80,19 @@ class PhotoDetail extends React.Component {
   render() {
     const {
       bigImage,
+      duotoneImage,
       id
     } = this.props.post
 
     const { big } = bigImage.childImageSharp
+    const { colored } = duotoneImage.childImageSharp
 
     const ToolBar = () => (
-      <div>
-        Colorize
-      </div>
+      <Tools>
+        <UIButton bg='black'>Original</UIButton>
+        <UIButton bg='black'>Duotone</UIButton>
+        <UIButton bg='black'>Colored</UIButton>
+      </Tools>
     )
 
     return (
@@ -84,7 +100,7 @@ class PhotoDetail extends React.Component {
         <div to={`/${id}/`}>
           <FullScreenImage>
             <Img
-              fluid={{ ...big }}
+              fluid={{ ...colored }}
             />
           <CloseButton><GatsbyLink to="/">&times;</GatsbyLink></CloseButton>
           <TextOverlay contentEditable>
@@ -116,6 +132,19 @@ export const postDetailFragment = graphql`
         # designs effortless as we change the args
         # for the query and we get new thumbnails.
         big: fluid(maxWidth: 540, maxHeight: 960) {
+          src
+          srcSet
+        }
+      }
+    }
+    duotoneImage: localImage {
+      childImageSharp {
+        # Here we query for *multiple* image thumbnails to be
+        # created. So with no effort on our part, 100s of
+        # thumbnails are created. This makes iterating on
+        # designs effortless as we change the args
+        # for the query and we get new thumbnails.
+        colored: fluid(duotone: { highlight: "#7bcbca", shadow: "#890b0b" }, maxWidth: 540, maxHeight: 960) {
           src
           srcSet
         }
