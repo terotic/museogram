@@ -4,6 +4,8 @@ import styled from "styled-components"
 import Img from "gatsby-image"
 import { Close } from 'rebass';
 
+import VtmLogo from "../../assets/vtm-logo.svg"
+
 const FullScreenImage = styled.div`
   position: absolute;
   width: 100%;
@@ -45,13 +47,21 @@ const TextOverlay = styled.div`
   font-weight: Bold;
 `
 
-const MuseumLogo = styled.div`
+const MuseumLogoPlacer = styled.div`
   position: absolute;
+  width: 80px;
+  height: 100px;
   top: 72px;
-  left: 24px;
+  left: 12px;
   font-size: 1em;
   line-height: 0.85;
   font-weight: Bold;
+  text-align: center;
+`
+
+const MuseumLogo = styled(VtmLogo)`
+  width: 100%;
+  fill: #ffffff;
 `
 
 class PhotoDetail extends React.Component {
@@ -77,10 +87,10 @@ class PhotoDetail extends React.Component {
               fluid={{ ...big }}
             />
           <CloseButton><GatsbyLink to="/">&times;</GatsbyLink></CloseButton>
-          <TextOverlay>
+          <TextOverlay contentEditable>
             Your Text Here
           </TextOverlay>
-          <MuseumLogo>[MUSEO]</MuseumLogo>
+          <MuseumLogoPlacer>&times;<br/><br/><MuseumLogo /></MuseumLogoPlacer>
           </FullScreenImage>
         </div>
         <div>
