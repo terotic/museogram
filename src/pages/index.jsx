@@ -80,7 +80,7 @@ class IndexPage extends React.Component {
             <Lead is="p" textAlign='center'>This application is a demo so the image editing features are for demonstration purposes only. Nevertheless you are very welcome to use and share the photos in your stories!</Lead>
           </Box>
           <Box p={3}>
-            <BlurbTitle>Work</BlurbTitle>
+            <BlurbTitle>Work Collection</BlurbTitle>
             <Lead is="p" textAlign='center'>Is your work different now than the work in these photographs from Central Union of Consumer Co-operatives collection? Collected by the <TextLink href='https://www.flickr.com/photos/valokuvataiteenmuseo/albums/72157676384900235' children="Finnish Museum of Photography" color="white"/></Lead>
           </Box>
           <Gallery justify='left' flexWrap='nowrap' w={1}>
